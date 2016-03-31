@@ -2,64 +2,58 @@ import requests;
 from bs4 import BeautifulSoup
 import re;
 
-summary_panel_class = "xg2";
-url = "http://www.1point3acres.com/bbs/forum-177-1.html";
-r = requests.get(url);
-tree = BeautifulSoup(r.text);
-summary_panel = tree.find_all(class_=summary_panel_class)[0];
+html_parser = "html.parser";
 
-#fonts = summary_panel.find_all("font", text = re.compile("^201"));
+data_map = [];
+link_id_rx = "^normalthread_";
+thread_link_rx = "^http://www.1point3acres.com/bbs/thread-\d*-\d-\d.html";
 
-year = "";
-link_map = {};
-year_re = re.compile("^201.");
-for child in summary_panel.contents:
-    try:
-        if year_re.match(child.text):
-            year = child.text;
-            link_map[year] = [];
+english_rx = r'[\x00-\x7f]+'
 
-        elif child.name == 'a':
-            link_map[year].append({'name' : child.text , 'link' : child['href'], "threads" : []});
-    except AttributeError:
-        pass
+links_table_class = "threadlisttableid";
+footer_id = "fd_page_bottom";
 
-    #print link_map;
+url = "http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&sortid=164&%1=&sortid=164&page=";
+page_no = 1;
+r = requests.get(url + str(page_no));
+tree = BeautifulSoup(r.text, html_parser);
 
-url_match = re.compile("^http://www.1point3acres.com");
-for year in link_map:
-    for major in link_map[year]:
-        r = requests.get(major['link'])
-        soup = BeautifulSoup(r.text);
-        #soup.find(id="threadstamp").find_parent("div").find("table");
-        table = soup.select(".t_fsz .t_f")[0];
-        links = table.find_all("a");
-        for link in links:
-            try:
-                if url_match.match(link["href"]):
-                    try:
-                        thread_dict = {};
-                        thread_dict["link"] = link["href"];
+#Total number of pages are in the footer. Should return something ~886
+footer = tree.find(id=footer_id).find("div", class_="pg").find("label").find("span");
+page_no_limit = int(re.findall(r'\d+', footer.text)[0]);
 
-                        r = requests.get(link["href"]);
-                        thread = BeautifulSoup(r.text);
-                        post = thread.select(".pcb")[0];
-                        
-                        title = post.find("u");
-                        thread_dict["title"] = title.text;
+links = 0;
+while page_no <= page_no_limit:
+    links = tree.find_all("tbody", id=re.compile(link_id_rx));
+    for link in links:
+        link_obj = {};
+        link_body = link.find("tr").find("th");
 
-                        thread_dict["points"] = [];
-                        points = post.find_all("li");
-                        for point in points:
-                            thread_dict["points"].append(point.text);
-                    except IndexError:
-                        pass;
+        #link of thread must be of a specific format, but there are many links in each table, so get the right one.
+        thread_link = list(filter(lambda x: re.compile(thread_link_rx).match(x["href"]) != None, link_body.find_all("a")))[0]["href"];
+        link_obj["url"] = thread_link;
 
-                    major["threads"].append(thread_dict);
-            except KeyError:
-                pass;
-            print major["threads"];
-        break;
+        thread_tree = BeautifulSoup(requests.get(thread_link).text, html_parser);
+
+        #it seems that the header is alawys the first 'u' element on the page. haven't found a case otherwise yet.
+        thread_header = thread_tree.find("u");
+        thread_content = thread_header.find_parent("div");
+        thread_items = thread_content.find_all("li");
+
+        thread_header_items = re.compile('\]').split(thread_header.text);
+        offer_details = thread_header_items[0][1:];
+        univ_details = thread_header_items[1][1:];
+
+        offer_details = re.compile(english_rx).match(offer_details).group(0);
+        univ_details = re.compile(english_rx).match(offer_details).group(0);
+
+        offer_details_items = re.compile('\.').split(offer_details);
+        year = offer_details_items[0];
+        degree = offer_details_items[1];
+        acceptance = offer_details_items[2];
+
+        
     break;
-
-print link_map;
+    page_no = page_no + 1;
+    r = requests.get(url + str(page_no));
+    tree = BeautifulSoup(r.text, html_parser);
