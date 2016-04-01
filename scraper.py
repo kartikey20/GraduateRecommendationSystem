@@ -14,7 +14,7 @@ links_table_class = "threadlisttableid";
 footer_id = "fd_page_bottom";
 
 url = "http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&sortid=164&%1=&sortid=164&page=";
-page_no = 2;
+page_no = 1;
 r = requests.get(url + str(page_no));
 tree = BeautifulSoup(r.text, html_parser);
 
@@ -77,18 +77,18 @@ while page_no <= page_no_limit:
                 link_obj['G'] = str(g_part)[2:];
                 link_obj['T'] = str(t_part)[2:];
                 link_obj['top'] = top[0] + '/' + top[1];
-                print(link_obj['top']);
 
             except IndexError:
                 pass;
             except AttributeError:
                 pass;
 
+            print(link_obj);
             data_map.append(link_obj);
         except AttributeError:
             continue;
        
-    break; 
+    #break; 
     page_no = page_no + 1;
     r = requests.get(url + str(page_no));
     tree = BeautifulSoup(r.text, html_parser);
