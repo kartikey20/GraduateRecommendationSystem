@@ -71,9 +71,16 @@ while page_no <= page_no_limit:
             try:
                 t_part = link_body.find("b", text=re.compile("^T$")).next_sibling;
                 g_part = link_body.find("b", text=re.compile("^G$")).next_sibling;
-                
+                top_part = link_body.find("font", text=re.compile("Top\d* \d*")).text;
+                top = re.findall(r'\d+', top_part);
+
                 link_obj['G'] = str(g_part)[2:];
                 link_obj['T'] = str(t_part)[2:];
+                link_obj['top'] = top[0] + '/' + top[1];
+                print(link_obj['top']);
+
+            except IndexError:
+                pass;
             except AttributeError:
                 pass;
 
