@@ -1,8 +1,18 @@
 import requests;
 from bs4 import BeautifulSoup
 import re;
+import json;
 
 html_parser = "html.parser";
+
+file_root = 'grad_data_';
+file_num = 1;
+file_suffix = ".json";
+file_name = file_root + str(file_num).zfill(5) + file_suffix;
+fp = open(file_name, "w+");
+max_rows = 20000;
+num_rows = 0;
+num_rows_total = 0;
 
 data_map = [];
 link_id_rx = "^normalthread_";
@@ -83,11 +93,23 @@ while page_no <= page_no_limit:
             except AttributeError:
                 pass;
 
-            print(link_obj);
-            data_map.append(link_obj);
+            #print(link_obj);
+            num_rows_total = num_rows_total+1;
+            if num_rows < max_rows:
+                num_rows = num_rows + 1;
+                json.dump(link_obj, fp);
+                #data_map.append(link_obj);
+            else:
+                fp.close();
+                file_num = file_num + 1;
+                file_name = file_root + str(file_num).zfill(5) + file_suffix;
+                fp = open(file_name, "w+");
+                num_rows = 0;
+                json.dump(link_obj, fp);
+
         except AttributeError:
             continue;
-       
+        
     #break; 
     page_no = page_no + 1;
     r = requests.get(url + str(page_no));
