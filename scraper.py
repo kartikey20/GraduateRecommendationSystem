@@ -15,7 +15,7 @@ pn = open("page_no.txt", "w+");
 pushover = None;
 try:
     pushover = json.load(open("pushover.json"));
-except FileNotFoundError:
+except OSError:
     pass;
 
 
