@@ -10,6 +10,7 @@ file_num = 1;
 file_suffix = ".json";
 file_name = file_root + str(file_num).zfill(5) + file_suffix;
 fp = open(file_name, "w+");
+pn = open("page_no.txt", "w+");
 
 pushover = None;
 try:
@@ -44,6 +45,7 @@ page_no_limit = int(re.findall(r'\d+', footer.text)[0]);
 links = 0;
 while page_no <= page_no_limit:
     print("Page no: " + str(page_no) + "/" + str(page_no_limit));
+    pn.write("Page no: " + str(page_no) + "/" + str(page_no_limit) + "\n");
     links = tree.find_all("tbody", id=lambda s: re.compile(link_id_rx1).match(s) or re.compile(link_id_rx2).match(s));
     for link in links:
         link_obj = {};
