@@ -10,12 +10,21 @@ file_num = 1;
 file_suffix = ".json";
 file_name = file_root + str(file_num).zfill(5) + file_suffix;
 fp = open(file_name, "w+");
+
+pushover = None;
+try:
+    pushover = json.load(open("pushover.json"));
+except FileNotFoundError:
+    pass;
+
+
 max_rows = 20000;
 num_rows = 0;
 num_rows_total = 0;
 
 data_map = [];
-link_id_rx = "^normalthread_";
+link_id_rx1 = "^normalthread_";
+link_id_rx2 = "^stickthread_";
 thread_link_rx = "^http://www.1point3acres.com/bbs/thread-\d*-\d-\d.html";
 
 english_rx = r'[\x00-\x7f]+'
@@ -34,24 +43,39 @@ page_no_limit = int(re.findall(r'\d+', footer.text)[0]);
 
 links = 0;
 while page_no <= page_no_limit:
-    links = tree.find_all("tbody", id=re.compile(link_id_rx));
+    print("Page no: " + str(page_no) + "/" + str(page_no_limit));
+    links = tree.find_all("tbody", id=lambda s: re.compile(link_id_rx1).match(s) or re.compile(link_id_rx2).match(s));
     for link in links:
         link_obj = {};
         link_body = link.find("tr").find("th");
 
+        try:
+            user = link.find("td", class_="by").find("a").text;
+            if len(user) != 0:
+                link_obj["user"] = user;
+        except AttributeError:
+            pass;
+
         #more information in thread, but can't parse yet.
-        '''
+        
         #link of thread must be of a specific format, but there are many links in each table, so get the right one.
-        thread_link = list(filter(lambda x: re.compile(thread_link_rx).match(x["href"]) != None, link_body.find_all("a")))[0]["href"];
-        link_obj["url"] = thread_link;
+        try:
+            thread_link = list(filter(lambda x: re.compile(thread_link_rx).match(x["href"]) != None, link_body.find_all("a")))[0]["href"];
+            link_obj["url"] = thread_link;
 
-        thread_tree = BeautifulSoup(requests.get(thread_link).text, html_parser);
+            thread_tree = BeautifulSoup(requests.get(thread_link).text, html_parser);
 
-        #it seems that the header is alawys the first 'u' element on the page. haven't found a case otherwise yet.
-        thread_header = thread_tree.find("u");
-        thread_content = thread_header.find_parent("div");
-        thread_items = thread_content.find_all("li");
-        '''
+            #it seems that the header is alawys the first 'u' element on the page. haven't found a case otherwise yet.
+            thread_header = thread_tree.find("u");
+            thread_content = thread_header.find_parent("div");
+            thread_items = thread_content.find_all("li");
+            thread_gpa = str(thread_content.find_all(text=re.compile("GPA"))[0]);
+            link_obj["gpa"] = re.findall(r'[0-9]\.[0-9]', thread_gpa)[0];
+        except IndexError:
+            pass;
+        except AttributeError:
+            pass;
+        
         try:
             thread_header = link_body.find("u");
             thread_header_items = re.compile('\]').split(thread_header.text);
@@ -114,3 +138,6 @@ while page_no <= page_no_limit:
     page_no = page_no + 1;
     r = requests.get(url + str(page_no));
     tree = BeautifulSoup(r.text, html_parser);
+
+if pushover != None:
+    r = requests.post("https://api.pushover.net/1/messages.json", data={'token' : pushover["pushover_api_key"], 'user': pushover["pushover_user_key"], 'message': "Processing Complete"});
