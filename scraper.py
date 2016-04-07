@@ -25,7 +25,7 @@ links_table_class = "threadlisttableid";
 footer_id = "fd_page_bottom";
 
 url = "http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&sortid=164&%1=&sortid=164&page=";
-'''
+
 r = requests.get(url + str(1));
 tree = BeautifulSoup(r.text, html_parser);
 
@@ -33,8 +33,7 @@ tree = BeautifulSoup(r.text, html_parser);
 footer = tree.find(id=footer_id).find("div", class_="pg").find("label").find("span");
 
 page_no_limit = int(re.findall(r'\d+', footer.text)[0]);
-'''
-page_no_limit = 897;
+
 page_buckets = [];
 num_per_bucket = math.ceil((page_no_limit + 1) / num_threads);
 buckets = [[]];
@@ -45,12 +44,16 @@ for i in range(1, page_no_limit + 1):
         buckets.append([]);
     buckets[pos].append(i);
 
+
+
 def query_pages_in_bucket(bucket, bucket_no):
-    page_no = bucket[0];
+    pos = 0
+    page_no = bucket[pos];
     file_name = file_root + str(bucket_no).zfill(5) + file_suffix;
     fp = open(file_name, "w+");
 
-    while page_no <= bucket[len(bucket) - 1]:
+    while pos < len(bucket):
+        page_no = bucket[pos];
         print("Page no: " + str(page_no) + ", bucket: " + str(bucket_no));
         pn.write("Page no: " + str(page_no) + ", bucket: " + str(bucket_no) + "\n");
         pn.flush();
@@ -133,14 +136,14 @@ def query_pages_in_bucket(bucket, bucket_no):
 
                 #print(link_obj);
                 json.dump(link_obj, fp);
-
+                
             except AttributeError:
                 continue;
-        #break; 
-        page_no = page_no + 1;
+        #break;
+        pos = pos + 1; 
 
     fp.flush();
     fp.close();
 
-for i in range(0, len(buckets)):
-    threading.Thread(target=query_pages_in_bucket, args=(buckets[i], i+1, )).start();
+#for i in range(0, len(buckets)):
+    #threading.Thread(target=query_pages_in_bucket, args=(buckets[i], i+1, )).start();
