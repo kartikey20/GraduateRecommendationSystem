@@ -1,7 +1,7 @@
 import pandas as pd
 import re
 
-in_file = './before_university_split.tsv'
+in_file = './ravishpart.tsv'
 out_file = './after_university_split.tsv'
 
 data = pd.read_table(in_file, encoding='utf-8')
@@ -11,7 +11,9 @@ print(data.shape)
 for i, row in data.iterrows():
     if i % 100 == 0:
         print(i)
-    universities = [u.strip() for u in str(row['university']).split(',')]
+
+    #some universities have commas in their names and are enclosed in quotes. this rx deals with that.
+    universities = [u.strip() for u in re.split(''',(?=(?:[^'"]|'[^']*'|"[^"]*")*$)''', str(row['university']))]
     for university in universities:
         new_row = row.copy()
         match_acceptance = re.match("([^\(]*)\(([^\(]*)\)", university)
