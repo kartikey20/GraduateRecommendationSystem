@@ -43,11 +43,11 @@ def transform_gre(row):
     new_scores = [score for score in scores if 170 >= score >= 130]
     if len(new_scores) >= 1:
         scores = [score for score in scores if 170 >= score]
-    if len(scores) == 1:
+    if len(scores) == 1 and max(scores) < 1600:
         V = scores[0] / 2
         Q = V
         A = 3
-    elif len(scores) == 2 and min(scores) <= 5:
+    elif len(scores) == 2 and min(scores) <= 5 and max(scores) < 1600:
         V = max(scores) / 2
         Q = V
         A = min(scores)
@@ -61,12 +61,14 @@ def transform_gre(row):
         A = float(scores[2])
     else:
         return row
-    if V <= 170 and Q <= 170 and V >= 130 and Q >= 130:
+    if V <= 170 and Q <= 170 and V >= 130 and Q >= 130 and A <= 6:
         V = (V - 130)/40
         Q = (Q - 130)/40
-    elif V >= 200 and V <= 800 and Q >= 200 and Q <= 800:
+    elif V >= 200 and V <= 800 and Q >= 200 and Q <= 800 and A <= 6:
         V = (V - 200)/600
         Q = (Q - 200)/600
+    else:
+        return row
 
     row['G-V'] = V
     row['G-Q'] = Q
