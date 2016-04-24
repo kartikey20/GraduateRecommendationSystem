@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <style>
 #nav-bar{
 	width:21%;
@@ -24,18 +25,20 @@
 	background-color: #ffffff;
 }
 .navLevel1{
-	font-family: sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	color: 555555;
-	line-height: 48px;
+	line-height: 28px;
 	font-size: 18px;
 	padding-left: 12px;
+	padding-top: 6px;
+	padding-bottom: 6px;
 	margin-left: 12px;
 }
 .navLevel2{
-	font-family: sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	color: #818181;
 	font-size: 16px;
-	line-height: 28px;
+	line-height: 14px;
 	margin-left: 12px;
 }
 .nav1Highlighted{
@@ -43,17 +46,17 @@
 	border-left: 6px solid #e71b68;
 }
 .nav2Highlighted{
-	font-weight: bold;
+	
 }
 #splash-text{
-	font-family: sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 48px;
 	width: 100%;
 	text-align: center;
 	padding-top: 100px;
 }
 button{
-	font-family: sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 20px;
 	color: #e71b68;
 	font-weight: bold;
@@ -67,6 +70,9 @@ button{
 button:hover{
 	color: #ffffff;
 	background-color: #e71b68;
+}
+button:focus{
+	outline: none;
 }
 #dynamic-content-row{
 	 height: 60%;
@@ -83,12 +89,40 @@ button:hover{
 	margin: auto 0;
 }
 .text1{
-	font-family: sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 36px;
 }
 .text2{
-	font-family: sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 18px;
+}
+input[type=text]{
+	padding: 12px;
+	margin-left: 18px;
+	border: 2px solid #444444;
+	border-radius: 5px;
+	font-size: 18px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: bold;
+	color: #444444;
+}
+
+input[type=text]:focus{
+	border: 2px solid #e71b68;
+	outline: none;
+}
+select{
+	width: 80%;
+	padding: 12px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+	margin-top: 50px;
+	background-color: #f1f1f1;
+	border: none;
+	border-radius: 5px;
+}
+select:focus{
+	outline: none;
 }
 input[type=range] {
   -webkit-appearance: none;
@@ -220,29 +254,37 @@ input[type=range]:focus::-ms-fill-upper {
 			console.log("firing updateDynamicContent() with step "+step)
 			$(".dc").css("visibility","hidden");
 			$("#dc"+step).css("visibility","visible");
+			$(".navLevel1").removeClass("nav1Highlighted");
 			var splashText;
 			switch(step)
 			{
 				case 0:
 				splashText = 'Welcome to U11';
+				$("#navGroup1").addClass("nav1Highlighted");
 				break;
 				case 1:
 				splashText = 'Tell us more about your tests';
+				$("#navGroup2").addClass("nav1Highlighted");
 				break;
 				case 2:
 				splashText = 'Where did you do your undergraduate studies?';
+				$("#navGroup2").addClass("nav1Highlighted");
 				break;
 				case 3:
 				splashText = 'Which major are you aiming for?';
+				$("#navGroup3").addClass("nav1Highlighted");
 				break;
 				case 4:
 				splashText = 'How important is college ranking to you?';
+				$("#navGroup3").addClass("nav1Highlighted");
 				break;
 				case 5:
 				splashText = 'How important is cost of attendence to you?';
+				$("#navGroup3").addClass("nav1Highlighted");
 				break;
 				case 6:
 				splashText = 'Here are the best colleges for you!';
+				$("#navGroup4").addClass("nav1Highlighted");
 				break;
 			}
 			$("#splash-text").html(splashText);
@@ -251,6 +293,9 @@ input[type=range]:focus::-ms-fill-upper {
 
 		function isStepComplete()
 		{
+			//FOR DEBUG
+			return true;
+
 			switch(step)
 			{
 				case 0:
@@ -287,16 +332,16 @@ input[type=range]:focus::-ms-fill-upper {
 					<td id="nav-bar" valign="top">
 						<img src="U11 logo.png" style="width: 100%" />
 						<ul style="list-style-type: none; padding: 0px">
-							<li><p class="navLevel1 nav1Highlighted">Introduction</p></li>
+							<li><p id="navGroup1" class="navLevel1">Introduction</p></li>
 							<li>
-							  	<p class="navLevel1">Academic Background</p>
+							  	<p id="navGroup2" class="navLevel1">Academic Background</p>
 							  	<ul style="list-style-type: none">
 							  		<li><p class="navLevel2 nav2Highlighted">Test Scores</p></li>
 							  		<li><p class="navLevel2">Education</p></li>
 							  	</ul>
 							</li>
 							<li>
-							  	<p class="navLevel1">Preferences</p>
+							  	<p id="navGroup3" class="navLevel1">Preferences</p>
 							  	<ul style="list-style-type: none">
 							  		<li><p class="navLevel2">Field of Study</p></li>
 							  		<li><p class="navLevel2">College Ranking</p></li>
@@ -304,7 +349,7 @@ input[type=range]:focus::-ms-fill-upper {
 							  	</ul>
 							</li>
 							<li>
-							  	<p class="navLevel1">Results</p>
+							  	<p id="navGroup4" class="navLevel1">Results</p>
 							</li>
 						</ul>
 					</td>
