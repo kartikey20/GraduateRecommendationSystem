@@ -102,11 +102,22 @@ function isStepComplete()
 }
 
 function executeClassifier() {
+	    data = {'gre_q' : '4',
+				'gre_v' : '4',
+				'gre_w' : '4',
+				'toefl' : '4',
+				'uni_rank' : '4',
+				'gpa' : '4',
+				'major' : 'cs',
+				'uni_imp' : '0',
+				'cost_imp' : '0'}
+		console.log(JSON.stringify(data, null, '\t'));
+
 	$.ajax({
 		type: "POST",
 		url: "http://localhost:5000/api/classify",
 		contentType: 'application/json;charset=UTF-8',
-		data: JSON.stringify({'gpa' : '4.0'}, null, '\t'),
+		data: JSON.stringify(data, null, '\t'),
 		success: function(response) {
 			console.log(response);
 		}
