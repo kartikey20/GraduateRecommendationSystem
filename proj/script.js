@@ -2,6 +2,7 @@
 var step = 0;
 
 var mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP;
+var showAlert = true;
 
 console.log("#dc"+step)
 //on page load, show intro screen
@@ -11,10 +12,15 @@ $(document).ready(function(){
 //on next button click
 $(document).ready(function(){
 	$("#nextbutton").click(function(){
-		if(isStepComplete(step)&&step<6)
-		{
+		if(!isStepComplete(step)) {
+			if(showAlert) {
+				alert("Please Fill all fields correctly before continuing to the next page.");
+				showAlert = false;
+			}
+		} else if(step<6) {
 			step++;
 			updateDynamicContent();
+			showAlert = true;
 		}
 	});
 });
@@ -74,26 +80,85 @@ function updateDynamicContent()
 
 function isStepComplete()
 {
-	//FOR DEBUG
-	return true;
+
+	highlight_unfilled = function(box, validater) {
+		if (!box[0].value || !validater(box[0].value)){
+			$(box).css("border-color", 'red');
+				return false;
+		} else {
+			$(box).css("border-color", "black");
+			return true;
+		}
+	}
+
+	validate_gre_vq = function(value) {
+		var val = parseInt(value);
+		if((val >= 130 && val <= 170) || (val >= 200 && val <= 800)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	validate_gre_w = function(value) {
+		var val = parseFloat(value);
+		return (value >= 0 && value <= 6);
+	}
+
+	validate_toefl = function(value) {
+		var val = parseInt(value);
+		return (value >= 0 && value <= 120);
+	}
+
+	validate_gpa = function(value) {
+		var val = parseFloat(value);
+		return (value >= 0 && value <= 4.0);
+	}
+
+	validate_unirank = function(value) {
+		var val = parseInt(value);
+		return (val >= 1 && value <= 1000);
+	}
 
 	switch(step)
 	{
 		case 0:
 		return true;
 		case 1:
-		mGRE_Q = parseInt(document.getElementById("GRE-Q").value); console.log("mGRE_Q is "+mGRE_Q);
-		mGRE_V = parseInt(document.getElementById("GRE-V").value); console.log("mGRE_V is "+mGRE_V);
-		mGRE_W = parseInt(document.getElementById("GRE-W").value); console.log("mGRE_W is "+mGRE_W);
-		mTOEFL = parseInt(document.getElementById("TOEFL").value); console.log("mTOEFL is "+mTOEFL);
-		if(isNaN(mGRE_Q)||isNaN(mGRE_V)||isNaN(mGRE_W)||isNaN(mTOEFL))
-			return false;
+			var allSet = highlight_unfilled($("#GRE-Q"), validate_gre_vq) &
+			highlight_unfilled($("#GRE-V"), validate_gre_vq) &
+			highlight_unfilled($("#GRE-W"), validate_gre_w) &
+			highlight_unfilled($("#TOEFL"), validate_toefl);
+
+			if(allSet) {
+				mGRE_Q = parseInt($("#GRE-Q")[0].value);
+				mGRE_V = parseInt($("#GRE-V")[0].value);
+				mGRE_W = parseInt($("#GRE-W")[0].value);
+				mTOEFL = parseInt($("#TOEFL")[0].value);
+			}
+
+			return allSet;
+
 		break;
 		case 2:
-		mUNI_RANK = parseInt(document.getElementById("UNI-RANK").value);
-		mGPA = parseInt(document.getElementById("GPA").value);
-		if(isNaN(mUNI_RANK)||isNaN(mGPA))
-			return false;
+			var allSet = highlight_unfilled($("#UNI-RANK"), validate_unirank) &
+						 highlight_unfilled($("#GPA"), validate_gpa);
+
+			if(allSet) {
+				mUNI_RANK = parseInt($("#UNI-RANK")[0].value);
+				mGPA = parseInt($("#GPA")[0].value);
+			}
+
+			return allSet;
+		break;
+		case 3:
+			mMAJOR = $("#MAJOR")[0].value;
+		break;
+		case 4:
+			mUNI_IMP = $("#RANK-IMPORTANCE")[0].value;
+		break;
+		case 5:
+			mCOST_IMP = $("#COST-IMPORTANCE")[0].value;
 		break;
 		default:
 		return true;
@@ -102,6 +167,10 @@ function isStepComplete()
 }
 
 function executeClassifier() {
+
+	console.log(mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP);
+
+
 	    data = {'gre_q' : '4',
 				'gre_v' : '4',
 				'gre_w' : '4',
@@ -111,7 +180,7 @@ function executeClassifier() {
 				'major' : 'cs',
 				'uni_imp' : '0',
 				'cost_imp' : '0'}
-		console.log(JSON.stringify(data, null, '\t'));
+		//console.log(JSON.stringify(data, null, '\t'));
 
 	$.ajax({
 		type: "POST",
