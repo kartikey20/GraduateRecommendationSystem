@@ -1,0 +1,185 @@
+'university of california, berkeley' : 24
+'university of california, davis' : 4
+'university of california, irvine' : 23
+'university of california, los angeles' : 749
+'university of california, merced' : 2
+'university of california, riverside' : 4
+'university of california, san diego' : 57
+'university of california, santa barbara' : 14
+'university of maryland, baltimore county' : 10
+'university of maryland, college park business school' : 5
+'university of maryland, college park' : 420
+alabama state university : 3
+alberta university : 2
+arizona state university : 1
+bentley university : 1
+boston university : 10
+brandeis university : 1
+brown university : 17
+california institute of technology : 2
+carnegie mellon university : 18
+case western reserve university : 1
+clemson university : 2
+college of san mateo : 1
+columbia university : 27
+cornell university : 16
+dartmouth college : 2
+delete : 4
+delware university : 1
+drexel university : 2
+duke university : 15
+emory university : 3
+eth zurich : 2
+fordham university : 2
+george mason university : 1
+george washington university : 2
+georgetown university : 2
+georgia institute of technology : 15
+harvard university : 1
+hong kong university of science and technology : 1
+illinois institute of technology : 3
+imperial college london : 1
+indiana university bloomington : 4
+iowa state university : 2
+johns hopkins university : 8
+lehigh university : 4
+leiden university : 1
+louisiana state university : 1
+massachusetts institute of technology : 1
+mcgill university : 3
+mcmaster university : 2
+mississippi state university : 2
+nan : 1
+nebraska wesleyan university : 8
+new york university : 4
+new york university tandon school of engineering : 5
+north carolina state university : 9
+northeastern university : 12
+northern michigan university : 1
+northwestern university : 5
+ohio state university : 10
+oregon state university : 2
+pennsylvania state university : 9
+princeton university : 1
+purdue university : 20
+rensselaer polytechnic institute : 5
+rice university : 9
+rochester university : 1
+rutgers university : 7
+san francisco state university : 1
+school of international training : 1
+simon fraser university : 1
+sit graduate institute : 1
+southern methodist university : 2
+stanford : 1
+stanford university : 6
+state university of new york : 20
+stony brook university : 3
+syracuse university : 9
+texas a&m university : 19
+toronto university : 1
+tufts university : 1
+tulane university : 1
+uinversity of new mexico : 1
+univeristy of arizona : 1
+univeristy of delaware : 1
+univeristy of michigan : 1
+univeristy of virginia : 1
+university at buffalo : 46
+university college dublin : 2
+university college london : 3
+university of alabama : 10
+university of alabama at birmingham : 1
+university of alaska fairbanks : 1
+university of alberta : 24
+university of arizona : 121
+university of arkansas : 1
+university of auckland : 1
+university of british columbia : 30
+university of british columbia at okanagan : 1
+university of calgary : 5
+university of california : 1907
+university of california santa cruz : 5
+university of cambridge : 3
+university of central florida : 4
+university of chicago : 335
+university of cincinnati : 17
+university of colorado : 5
+university of colorado at denver : 2
+university of colorado boulder : 43
+university of connecticut : 191
+university of dayton : 4
+university of delaware : 111
+university of denver : 3
+university of florida : 655
+university of georgia : 52
+university of hawaii at manoa : 1
+university of helsinki : 1
+university of houston : 24
+university of illinois at chicago : 48
+university of illinois at urbana-champaign : 1034
+university of iowa : 47
+university of kansas : 14
+university of kentucky : 24
+university of louisville : 2
+university of management and technology : 1
+university of manchester : 1
+university of manitoba : 1
+university of mary washington : 2
+university of maryland : 63
+university of massachusetts : 171
+university of massachusetts amherst : 121
+university of massachusetts lowell : 2
+university of medicine and dentistry of new jersey : 2
+university of melbourne : 4
+university of miami : 27
+university of michigan : 1098
+university of michigan–dearborn : 1
+university of minnesota : 502
+university of minnesota duluth : 3
+university of mississippi : 1
+university of missouri : 35
+university of montreal : 2
+university of nebraska : 4
+university of nebraska-lincoln : 9
+university of new brunswick : 1
+university of new hampshire : 5
+university of new mexico : 12
+university of north carolina at chapel hill : 212
+university of north carolina at charlotte : 25
+university of north dakota : 1
+university of notre dame : 25
+university of ohio : 1
+university of oregon : 14
+university of ottawa : 2
+university of oxford : 4
+university of pennsylvania : 61
+university of pittsburgh : 118
+university of queensland : 1
+university of rhode island : 3
+university of rochester : 56
+university of southern california : 21
+university of tennessee : 3
+university of texas : 1
+university of texas at arlington : 3
+university of texas at austin : 23
+university of texas at dallas : 6
+university of toronto : 3
+university of utah : 1
+university of virginia : 8
+university of washington : 21
+university of washington-madison : 1
+university of waterloo : 1
+university of wisconsin : 4
+university of wisconsin-madison : 4
+university of wisconsin–madison : 1
+university of wisconsin–milwaukee : 2
+vanderbilt university : 4
+vermont state university : 2
+virginia tech : 5
+washington university : 1
+washington university in st. louis : 5
+william & mary : 2
+worcester polytechnic institute : 8
+worcester polytechnic state university : 1
+yale university : 4

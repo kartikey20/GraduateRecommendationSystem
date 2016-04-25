@@ -2,14 +2,14 @@ import pandas;
 import re;
 import collections;
 
-data = pandas.read_table('ravishpart.tsv', '\t');
+data = pandas.read_table('ravishpart2.tsv', '\t');
 universities = data['university'];
 univertity_map = {};
 file_out = 'cluster_out.txt';
 fp = open(file_out, 'w+');
 
 for row in universities:
-	univ_values = re.split(''',(?=(?:[^'"]|'[^']*'|"[^"]*")*$)''', row);
+	univ_values = re.split(''',(?=(?:[^'"]|'[^']*'|"[^"]*")*$)''', str(row));
 	for univ in univ_values:
 		univ_norm = univ.lower().strip().encode('utf-8');
 		if univ_norm not in univertity_map:
