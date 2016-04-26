@@ -5,24 +5,21 @@ var step = 0;
 
 var mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP;
 
-var majors = {'Aerospace' : 'AE', 
-			  'Biomedical' : 'BME',
-			  'Biostatistics' : 'BIOSTAT',
+var majors = {'Aerospace' : 'Aero', 
+			  'Biostatistics' : 'Stat/Biostat',
 			  'Chemical' : 'Chem',
-			  'Civil' : 'CE',
 			  'Computer Science' : 'CS',
-			  'Geology / Earth Science' : 'GEO',
+			  'Geology / Earth Science' : 'Earth/Geo',
 			  'Electrical and Computer Engineering' : 'ECE',
 			  'Economics' : 'Econ',
 			  'Education' : 'Edu',
 			  'Electrical Engineering' : 'EE',
-			  'Environmental Engineering' : 'ENENG',
-			  'Financial' : 'Business',
-			  'Industrial / Operations Research' : 'ISI',
+			  'Environmental Engineering' : 'Envir',
+			  'Financial' : 'Financial',
 			  'Material' : 'Material',
 			  'Math' : 'Math',
 			  'Mechanical' : 'Mech',
-			  'Information Science / Data Science' : 'Data',
+			  'Information Science / Data Science' : 'MIS/DataScience',
 			  'Physics' : 'Physics'
 			 };
 var showAlert = true;
