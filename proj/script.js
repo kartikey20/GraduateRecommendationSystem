@@ -73,7 +73,7 @@ function updateDynamicContent()
 	switch(step)
 	{
 		case 0:
-		splashText = 'Welcome to U11';
+		splashText = 'Welcome to U11<br><p style="font-size: 30px">A Graduate School Recommendation System</p>';
 		$("#navGroup1").addClass("nav1Highlighted");
 		break;
 		case 1:
