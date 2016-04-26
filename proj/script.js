@@ -3,6 +3,7 @@ var step = 0;
 
 var mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP;
 var showAlert = true;
+var debug = true;
 
 console.log("#dc"+step)
 //on page load, show intro screen
@@ -12,7 +13,7 @@ $(document).ready(function(){
 //on next button click
 $(document).ready(function(){
 	$("#nextbutton").click(function(){
-		if(!isStepComplete(step)) {
+		if(!debug && !isStepComplete(step)) {
 			if(showAlert) {
 				alert("Please Fill all fields correctly before continuing to the next page.");
 				showAlert = false;
@@ -167,21 +168,31 @@ function isStepComplete()
 }
 
 function updateResults(results) {
-	var thead = "<thead><tr>" + "<td>University</td>" + "<td align='right'>Chance</td>" + "</tr></thead>";
+	var thead = "<thead><tr>" + "<td>University</td>" + 
+				"<td align='center'>Ranking</td>" + "<td align='center'>Cost of Attendence</td>" +
+				"<td align='right'>Chance</td>" + "</tr></thead>";
 	
 	var tbody = "<tbody>";
 
 	$.each(results, function(i, row) {
 		tbody = tbody + "<tr>";
 		univ = "<a href=" + row['url'] + ">" + row['university'] + "</a>";
+		cost = "$" + parseFloat(row['cost']);
+		ranking = "#" + parseInt(row['ranking']);
 		chance = parseFloat(row['chance'] * 100) + "%";
 
-		tbody = tbody + "<td>" + univ + "</td>" + "<td align='right'>" + chance + "</td>" + "</tr>";
+		tbody = tbody + "<td>" + univ + "</td>" +
+						"<td align='center'>" + ranking + "</td>" +
+						"<td align='center'>" + cost + "</td>" +
+						 "<td align='right'>" + chance + "</td>"
+
+				+ "</tr>";
 	});
 
 	tbody = tbody + "</tbody";
 
 	var html_table = "<table class='res_table' align='center'>" + thead + tbody + "</table>";
+	console.log(html_table);
 	$("#dc6").html(html_table);
 }
 
