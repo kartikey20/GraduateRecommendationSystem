@@ -217,7 +217,7 @@ function updateResults(results) {
 	$.each(results, function(i, row) {
 		tbody = tbody + "<tr class='results-item-row'>";
 		univ = "<a href=http://" + row['url'] + ">" + row['university'] + "</a>";
-		cost = "$" + parseFloat(row['cost']);
+		cost = "$" + parseInt(row['cost']).toLocaleString('en-US');
 		ranking = "#" + parseInt(row['ranking']);
 		chance = parseFloat(row['chance'] * 100).toFixed(2) + "%";
 
