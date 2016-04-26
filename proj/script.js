@@ -206,7 +206,7 @@ function updateResults(results) {
 
 	$.each(results, function(i, row) {
 		tbody = tbody + "<tr>";
-		univ = "<a href=" + row['url'] + ">" + row['university'] + "</a>";
+		univ = "<a href=http://" + row['url'] + ">" + row['university'] + "</a>";
 		cost = "$" + parseFloat(row['cost']);
 		ranking = "#" + parseInt(row['ranking']);
 		chance = parseFloat(row['chance'] * 100).toFixed(2) + "%";
