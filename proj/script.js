@@ -6,9 +6,7 @@ var step = 0;
 var mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP;
 var table_results;
 
-var majors = {'Aerospace' : 'Aero', 
-			  'Biostatistics' : 'Stat/Biostat',
-			  'Chemical' : 'Chem',
+var majors = {'Chemical' : 'Chem',
 			  'Computer Science' : 'CS',
 			  'Geology / Earth Science' : 'Earth/Geo',
 			  'Electrical and Computer Engineering' : 'ECE',
@@ -21,7 +19,8 @@ var majors = {'Aerospace' : 'Aero',
 			  'Math' : 'Math',
 			  'Mechanical' : 'Mech',
 			  'Information Science / Data Science' : 'MIS/DataScience',
-			  'Physics' : 'Physics'
+			  'Physics' : 'Physics',
+			  'Stats/Biostats' : 'Stat/Biostat',
 			 };
 var showAlert = true;
 

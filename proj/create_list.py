@@ -9,7 +9,7 @@ def normalize(series):
     return (series - series.min())/(series.max() - series.min())
 
 def create_list(gre_q, gre_v, gre_w, toefl, ranking, gpa, major, rank_preference, cost_preference):
-    acceptance_preference = 0.1
+    acceptance_preference = 0.5
     with open('../data/trained_models', 'rb') as f:
         classifiers = pickle.load(f)
 
