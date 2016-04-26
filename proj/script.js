@@ -3,7 +3,7 @@ var step = 0;
 
 var mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP;
 var showAlert = true;
-var debug = true;
+var debug = false;
 
 console.log("#dc"+step)
 //on page load, show intro screen
