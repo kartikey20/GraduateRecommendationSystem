@@ -6,10 +6,8 @@ var step = 0;
 var mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP;
 
 var majors = {'Aerospace' : 'Aero', 
-			  'Biomedical' : 'Bio',
 			  'Biostatistics' : 'Stat/Biostat',
 			  'Chemical' : 'Chem',
-			  'Civil' : 'Civil',
 			  'Computer Science' : 'CS',
 			  'Geology / Earth Science' : 'Earth/Geo',
 			  'Electrical and Computer Engineering' : 'ECE',
@@ -18,7 +16,6 @@ var majors = {'Aerospace' : 'Aero',
 			  'Electrical Engineering' : 'EE',
 			  'Environmental Engineering' : 'Envir',
 			  'Financial' : 'Financial',
-			  'Industrial / Operations Research' : 'IEOR',
 			  'Material' : 'Material',
 			  'Math' : 'Math',
 			  'Mechanical' : 'Mech',
