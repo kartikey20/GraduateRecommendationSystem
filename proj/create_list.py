@@ -28,8 +28,9 @@ def create_list(gre_q, gre_v, gre_w, toefl, ranking, gpa, major, rank_preference
     data['Qsscore_normalized'] = normalize(data['QSscore'])
 
     data = data.groupby('university').max()
+    print(major);
     data['chance'] = data.index.map(lambda univ: 0 if (major, univ) not in classifiers else classifiers[major, univ].predict_proba([gre_v, gre_q, gre_w, gpa, toefl, undergrad_in_top15, undergrad_in_top30, gre_v + gre_q])[0, 1])
-    print(data['chance']);
+    #print(data['chance']);
 
     if objective == 'linear':
         data['sort-criterium'] = cost_preference * data['cost_normalized'] + rank_preference * data['Qsscore_normalized'] + acceptance_preference * data['chance']

@@ -198,14 +198,14 @@ function isStepComplete()
 }
 
 function updateResults(results) {
-	var thead = "<thead><tr>" + "<td>University</td>" + 
+	var thead = "<thead><tr class='results-header-row'>" + "<td>University</td>" + 
 				"<td align='center'>Ranking</td>" + "<td align='center'>Cost of Attendence</td>" +
 				"<td align='right'>Chance</td>" + "</tr></thead>";
 	
 	var tbody = "<tbody>";
 
 	$.each(results, function(i, row) {
-		tbody = tbody + "<tr>";
+		tbody = tbody + "<tr class='results-item-row'>";
 		univ = "<a href=http://" + row['url'] + ">" + row['university'] + "</a>";
 		cost = "$" + parseFloat(row['cost']);
 		ranking = "#" + parseInt(row['ranking']);
@@ -221,9 +221,10 @@ function updateResults(results) {
 
 	tbody = tbody + "</tbody";
 
-	var html_table = "<table class='res_table' align='center'>" + thead + tbody + "</table>";
+	var html_table = "<table class='results-table' cellspacing='0' class='res_table' align='center'>" + thead + tbody + "</table>";
 	console.log(html_table);
 	$("#dc6").html(html_table);
+	$(".results-table td").addClass("results-cell");
 }
 
 function executeClassifier() {
@@ -231,15 +232,15 @@ function executeClassifier() {
 		console.log(mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP);
 
 
-	    data = {'gre_q' : 4,
-				'gre_v' : 4,
-				'gre_w' : 4,
-				'toefl' : 4,
-				'uni_rank' : 4,
-				'gpa' : 4,
-				'major' : '4',
-				'uni_imp' : 0.5,
-				'cost_imp' : 0.5}
+	    data = {'gre_q' : mGRE_Q,
+				'gre_v' : mGRE_V,
+				'gre_w' : mGRE_W,
+				'toefl' : mTOEFL,
+				'uni_rank' : mUNI_RANK,
+				'gpa' : mGPA,
+				'major' : mMAJOR,
+				'uni_imp' : mUNI_IMP,
+				'cost_imp' : mCOST_IMP}
 		//console.log(JSON.stringify(data, null, '\t'));
 
 	$.ajax({
