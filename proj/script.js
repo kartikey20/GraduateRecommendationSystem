@@ -201,7 +201,13 @@ function isStepComplete()
 }
 
 function updateResults(results) {
+
+	results.sort(function(a, b) {
+		return b['chance'] - a['chance'];
+	});
+
 	table_results = results;
+
 	var thead = "<thead><tr class='results-header-row'>" + "<td>University</td>" + 
 				"<td align='center'>Ranking</td>" + "<td align='center'>Cost of Attendence</td>" +
 				"<td align='right'>Chance</td>" + "</tr></thead>";
