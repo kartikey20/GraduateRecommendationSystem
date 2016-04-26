@@ -11,16 +11,32 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/api/classify', methods=['POST'])
 @cross_origin()
 def classify():
-    return jsonify({'gre_q' : request.json['gre_q'],
-    				'gre_v' : request.json['gre_v'],
-    				'gre_w' : request.json['gre_w'],
-    				'toefl' : request.json['toefl'],
-    				'uni_rank' : request.json['uni_rank'],
-    				'gpa' : request.json['gpa'],
-    				'major' : request.json['major'],
-    				'uni_imp' : request.json['uni_imp'],
-    				'cost_imp' : request.json['cost_imp']
-				  });
+    universities = [ {
+                    'university' : 'Georgia Tech',
+                    'chance' : '0.9',
+                    'url' : 'http://www.gatech.edu'
+                },
+                {
+                    'university' : 'University of Georgia',
+                    'chance' : '0.7',
+                    'url' : 'http://www.uga.edu'
+                },
+                {   'university' : 'Emory University',
+                    'chance' : '0.5',
+                    'url' : 'http://www.emory.edu'
+                },
+                {   'university' : 'Kennesaw State University',
+                    'chance' : '0.3',
+                    'url' : 'http://www.kennesaw.edu'
+                },
+                {
+                    'university' : 'Georgia State University',
+                    'chance' : '0.1',
+                    'url' : 'http://www.gsu.edu'
+                }
+              ]
+
+    return jsonify({'results' : universities});
 
 if __name__ == '__main__':
     app.run(debug=True)

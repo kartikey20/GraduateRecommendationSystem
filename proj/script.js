@@ -166,9 +166,28 @@ function isStepComplete()
 	return true;
 }
 
+function updateResults(results) {
+	var thead = "<thead><tr>" + "<td>University</td>" + "<td align='right'>Chance</td>" + "</tr></thead>";
+	
+	var tbody = "<tbody>";
+
+	$.each(results, function(i, row) {
+		tbody = tbody + "<tr>";
+		univ = "<a href=" + row['url'] + ">" + row['university'] + "</a>";
+		chance = parseFloat(row['chance'] * 100) + "%";
+
+		tbody = tbody + "<td>" + univ + "</td>" + "<td align='right'>" + chance + "</td>" + "</tr>";
+	});
+
+	tbody = tbody + "</tbody";
+
+	var html_table = "<table class='res_table' align='center'>" + thead + tbody + "</table>";
+	$("#dc6").html(html_table);
+}
+
 function executeClassifier() {
 
-	console.log(mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP);
+		console.log(mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP);
 
 
 	    data = {'gre_q' : '4',
@@ -188,7 +207,7 @@ function executeClassifier() {
 		contentType: 'application/json;charset=UTF-8',
 		data: JSON.stringify(data, null, '\t'),
 		success: function(response) {
-			console.log(response);
+			updateResults(response['results']);
 		}
 	});
 }

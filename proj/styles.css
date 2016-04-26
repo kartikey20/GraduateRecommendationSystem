@@ -84,6 +84,7 @@ button:focus{
 	text-align: center;
 	margin: auto 0;
 }
+
 .text1{
 	font-family: 'Open Sans', sans-serif;
 	font-size: 36px;
@@ -208,4 +209,12 @@ input[type=range]:focus::-ms-fill-lower {
 }
 input[type=range]:focus::-ms-fill-upper {
   background: #ffffff;
+}
+
+.res_table td {
+	font-size: 30px;
+}
+
+.res_table thead td {
+	border-bottom: 1px solid black;
 }
