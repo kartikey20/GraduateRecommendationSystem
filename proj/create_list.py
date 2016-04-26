@@ -19,7 +19,7 @@ def create_list(gre_q, gre_v, gre_w, toefl, ranking, gpa, major, rank_preference
     undergrad_in_top15 = ranking <= 15
     undergrad_in_top30 = ranking <= 30
 
-    data = pd.read_table('../data/main-data.tsv', encoding='utf-8')
+    data = pd.read_table('../data/maindata.tsv', encoding='utf-8')
     data['QSscore'] = data['QSscore'].convert_objects(convert_numeric=True)
     data['cost'] = data['cost'].convert_objects(convert_numeric=True)
     data = data[np.isfinite(data['QSscore'])]
@@ -29,6 +29,7 @@ def create_list(gre_q, gre_v, gre_w, toefl, ranking, gpa, major, rank_preference
 
     data = data.groupby('university').max()
     data['chance'] = data.index.map(lambda univ: 0 if (major, univ) not in classifiers else classifiers[major, univ].predict_proba([gre_v, gre_q, gre_w, gpa, toefl, undergrad_in_top15, undergrad_in_top30, gre_v + gre_q])[0, 1])
+    print(data['chance']);
 
     if objective == 'linear':
         data['sort-criterium'] = cost_preference * data['cost_normalized'] + rank_preference * data['Qsscore_normalized'] + acceptance_preference * data['chance']
