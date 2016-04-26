@@ -1,7 +1,8 @@
 #!flask/bin/python
-from flask import Flask, jsonify
-from flask import request
+from flask import Flask, jsonify, request
 from flask.ext.cors import CORS, cross_origin
+import create_list
+
 
 app = Flask(__name__)
 CORS(app);
@@ -11,40 +12,18 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/api/classify', methods=['POST'])
 @cross_origin()
 def classify():
-    universities = [ {
-                    'university' : 'Georgia Tech',
-                    'chance' : '0.9',
-                    'url' : 'http://www.gatech.edu',
-                    'cost' : '15000',
-                    'ranking' : '1'
-                },
-                {
-                    'university' : 'University of Georgia',
-                    'chance' : '0.7',
-                    'url' : 'http://www.uga.edu',
-                    'cost' : '12000',
-                    'ranking' : '2'
-                },
-                {   'university' : 'Emory University',
-                    'chance' : '0.5',
-                    'url' : 'http://www.emory.edu',
-                    'cost' : '9000',
-                    'ranking' : '3'
-                },
-                {   'university' : 'Kennesaw State University',
-                    'chance' : '0.3',
-                    'url' : 'http://www.kennesaw.edu',
-                    'cost' : '6000',
-                    'ranking' : '4'
-                },
-                {
-                    'university' : 'Georgia State University',
-                    'chance' : '0.1',
-                    'url' : 'http://www.gsu.edu',
-                    'cost' : '3000',
-                    'ranking' : '5'
-                }
-              ]
+    
+    gre_q = request.json['gre_q'];
+    gre_v = request.json['gre_v'];
+    gre_w = request.json['gre_w'];
+    toefl = request.json['toefl'];
+    uni_rank = request.json['uni_rank'];
+    gpa = request.json['gpa'];
+    major = request.json['major'];
+    uni_imp = request.json['uni_imp'];
+    cost_imp = request.json['cost_imp'];
+
+    universities = create_list.create_list(gre_q, gre_v, gre_w, toefl, uni_rank, gpa, major, uni_imp, cost_imp);
 
     return jsonify({'results' : universities});
 

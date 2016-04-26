@@ -1,13 +1,43 @@
+var debug = true;
+
 //global variable for the step being shown
 var step = 0;
 
 var mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP;
+
+var majors = {'Aerospace' : 'AE', 
+			  'Biomedical' : 'BME',
+			  'Biostatistics' : 'BIOSTAT',
+			  'Chemical' : 'Chem',
+			  'Civil' : 'CE',
+			  'Computer Science' : 'CS',
+			  'Geology / Earth Science' : 'GEO',
+			  'Electrical and Computer Engineering' : 'ECE',
+			  'Economics' : 'Econ',
+			  'Education' : 'Edu',
+			  'Electrical Engineering' : 'EE',
+			  'Environmental Engineering' : 'ENENG',
+			  'Financial' : 'Business',
+			  'Industrial / Operations Research' : 'ISI',
+			  'Material' : 'Material',
+			  'Math' : 'Math',
+			  'Mechanical' : 'Mech',
+			  'Information Science / Data Science' : 'Data',
+			  'Physics' : 'Physics'
+			 };
 var showAlert = true;
-var debug = false;
+
 
 console.log("#dc"+step)
 //on page load, show intro screen
 $(document).ready(function(){
+
+	dropdown_options = "";
+	$.each(majors, function(i, row) {
+		dropdown_options = dropdown_options + "<option>" + i + "</option>";
+	});
+
+	$("#MAJOR").html(dropdown_options);
 	updateDynamicContent();
 });
 //on next button click
@@ -147,19 +177,19 @@ function isStepComplete()
 
 			if(allSet) {
 				mUNI_RANK = parseInt($("#UNI-RANK")[0].value);
-				mGPA = parseInt($("#GPA")[0].value);
+				mGPA = parseFloat($("#GPA")[0].value);
 			}
 
 			return allSet;
 		break;
 		case 3:
-			mMAJOR = $("#MAJOR")[0].value;
+			mMAJOR = majors[$("#MAJOR")[0].value];
 		break;
 		case 4:
-			mUNI_IMP = $("#RANK-IMPORTANCE")[0].value;
+			mUNI_IMP = parseFloat($("#RANK-IMPORTANCE")[0].value)/100.0;
 		break;
 		case 5:
-			mCOST_IMP = $("#COST-IMPORTANCE")[0].value;
+			mCOST_IMP = parseFloat($("#COST-IMPORTANCE")[0].value)/100.0;
 		break;
 		default:
 		return true;
@@ -179,7 +209,7 @@ function updateResults(results) {
 		univ = "<a href=" + row['url'] + ">" + row['university'] + "</a>";
 		cost = "$" + parseFloat(row['cost']);
 		ranking = "#" + parseInt(row['ranking']);
-		chance = parseFloat(row['chance'] * 100) + "%";
+		chance = parseFloat(row['chance'] * 100).toFixed(2) + "%";
 
 		tbody = tbody + "<td>" + univ + "</td>" +
 						"<td align='center'>" + ranking + "</td>" +
@@ -201,15 +231,15 @@ function executeClassifier() {
 		console.log(mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP);
 
 
-	    data = {'gre_q' : '4',
-				'gre_v' : '4',
-				'gre_w' : '4',
-				'toefl' : '4',
-				'uni_rank' : '4',
-				'gpa' : '4',
-				'major' : 'cs',
-				'uni_imp' : '0',
-				'cost_imp' : '0'}
+	    data = {'gre_q' : 4,
+				'gre_v' : 4,
+				'gre_w' : 4,
+				'toefl' : 4,
+				'uni_rank' : 4,
+				'gpa' : 4,
+				'major' : '4',
+				'uni_imp' : 0.5,
+				'cost_imp' : 0.5}
 		//console.log(JSON.stringify(data, null, '\t'));
 
 	$.ajax({
