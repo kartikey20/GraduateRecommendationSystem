@@ -4,6 +4,7 @@ var debug = false;
 var step = 0;
 
 var mGRE_Q, mGRE_V, mGRE_W, mTOEFL, mUNI_RANK, mGPA, mMAJOR, mUNI_IMP, mCOST_IMP;
+var table_results;
 
 var majors = {'Aerospace' : 'Aero', 
 			  'Biostatistics' : 'Stat/Biostat',
@@ -49,6 +50,8 @@ $(document).ready(function(){
 			step++;
 			updateDynamicContent();
 			showAlert = true;
+		} else if(step == 6) {
+			prompt_save(table_results);
 		}
 	});
 });
@@ -75,6 +78,7 @@ function updateDynamicContent()
 		case 0:
 		splashText = 'Welcome to U11<br><p style="font-size: 30px">A Graduate School Recommendation System</p>';
 		$("#navGroup1").addClass("nav1Highlighted");
+		$("#nextbutton").text("Next");
 		break;
 		case 1:
 		splashText = 'Tell us more about your tests';
@@ -95,10 +99,12 @@ function updateDynamicContent()
 		case 5:
 		splashText = 'How important is cost of attendence to you?';
 		$("#navGroup3").addClass("nav1Highlighted");
+		$("#nextbutton").text("Next");
 		break;
 		case 6:
 		splashText = 'Here are the best colleges for you!';
 		$("#navGroup4").addClass("nav1Highlighted");
+		$("#nextbutton").text("Save");
 		executeClassifier();
 		break;
 	}
@@ -195,6 +201,7 @@ function isStepComplete()
 }
 
 function updateResults(results) {
+	table_results = results;
 	var thead = "<thead><tr class='results-header-row'>" + "<td>University</td>" + 
 				"<td align='center'>Ranking</td>" + "<td align='center'>Cost of Attendence</td>" +
 				"<td align='right'>Chance</td>" + "</tr></thead>";
@@ -219,9 +226,35 @@ function updateResults(results) {
 	tbody = tbody + "</tbody";
 
 	var html_table = "<table class='results-table' cellspacing='0' class='res_table' align='center'>" + thead + tbody + "</table>";
-	console.log(html_table);
+	
 	$("#dc6").html(html_table);
 	$(".results-table td").addClass("results-cell");
+}
+
+function prompt_save(results) {
+	var csvContent = "data:text/csv;charset=utf-8,";
+	var keys = Object.keys(results[0]);
+	csvContent = csvContent + keys.join(",") + "\n";
+
+	$.each(results, function(i, row) {
+		var row_str = "";
+		$.each(keys, function(i, key) {
+			row_str = row_str + row[key];
+			if(i < keys.length - 1) {
+				row_str = row_str + ",";
+			} else {
+				row_str = row_str + "\n";
+			}
+		});
+		csvContent = csvContent + row_str;
+	});
+	
+	//I did not write this, retreived from here: http://stackoverflow.com/a/14966131/1843486
+	var encodedUri = encodeURI(csvContent);
+	var link = document.createElement("a");
+	link.setAttribute("href", encodedUri);
+	link.setAttribute("download", "u11_gradscool_results.csv");
+	link.click();
 }
 
 function executeClassifier() {
