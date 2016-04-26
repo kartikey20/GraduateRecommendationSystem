@@ -251,3 +251,8 @@ input[type=range]:focus::-ms-fill-upper {
 .results-cell{
 	padding: 6px;
 }
+
+.results-university-name {
+	/*TODO
+	*/
+}
