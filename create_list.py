@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 
 #Input
-rank_preference = 0.6
-cost_preference = 0.4
+rank_preference = 0.4
+cost_preference = 0.6
 
 
 objective = 'linear'
