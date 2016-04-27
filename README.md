@@ -38,9 +38,16 @@ The following python libraries are required for the application to run properly:
   * scipy
   * sklearn
 
-All of these can be installed using `pip`. 
+These should be installed via `pip`, corresponding to version 3 of Python.
 
 ### Setup Instructions
+Start be ensuring that the following port is not being used by another application:
+    
+    netstat -tn | grep 5000
+
+If `netstat` is not installed, it can be installed via `apt-get`, `homebrew`, or `choco`. The above command should not print any output. If it prints a connection that is using the port on localhost, kill the application before continuing.
+
+
 The application runs with a Backend and the Frontend. Having the above dependencies installed, start the backend service as follows:
 
     cd site/
@@ -53,4 +60,6 @@ Start a new service (while keeping the above service running):
     cd site/
     python -m http.server
 
-The application can be viewed in a browser window, on `http://localhost:8000`
+The application will be viewable now. It will be accesible via a browser window, on `http://localhost:8000`. 
+
+Upon opening the website, follow the on-screen instructions to go through the different steps, and view the results of the app. Images of what different steps of the application are can be viewed in the project sub-directory `images/`. 
