@@ -275,7 +275,7 @@ function executeClassifier() {
 
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:5000/api/classify",
+		url: "https://u11-grad.herokuapp.com/api/classify",
 		contentType: 'application/json;charset=UTF-8',
 		data: JSON.stringify(data, null, '\t'),
 		success: function(response) {

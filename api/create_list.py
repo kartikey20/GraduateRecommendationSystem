@@ -10,7 +10,7 @@ def normalize(series):
 
 def create_list(gre_q, gre_v, gre_w, toefl, ranking, gpa, major, rank_preference, cost_preference):
     acceptance_preference = 0.5
-    with open('../data/trained_models', 'rb') as f:
+    with open('data/trained_models', 'rb') as f:
         classifiers = pickle.load(f)
 
     gpa = gpa/4
@@ -19,7 +19,7 @@ def create_list(gre_q, gre_v, gre_w, toefl, ranking, gpa, major, rank_preference
     undergrad_in_top15 = ranking <= 15
     undergrad_in_top30 = ranking <= 30
 
-    data = pd.read_table('../data/maindata.tsv', encoding='utf-8')
+    data = pd.read_table('data/maindata.tsv', encoding='utf-8')
     data['QSscore'] = data['QSscore'].convert_objects(convert_numeric=True)
     data['cost'] = data['cost'].convert_objects(convert_numeric=True)
     data = data[np.isfinite(data['QSscore'])]
