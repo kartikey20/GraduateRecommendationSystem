@@ -8,6 +8,10 @@ app = Flask(__name__)
 CORS(app);
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+@app.route('/api/wake', methods=['GET'])
+@cross_origin()
+def wake():
+    return jsonify({'result' : 0});
 
 @app.route('/api/classify', methods=['POST'])
 @cross_origin()

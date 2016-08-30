@@ -28,6 +28,7 @@ var showAlert = true;
 console.log("#dc"+step)
 //on page load, show intro screen
 $(document).ready(function(){
+	wakeApi();
 
 	dropdown_options = "";
 	$.each(majors, function(i, row) {
@@ -255,6 +256,17 @@ function prompt_save(results) {
 	link.setAttribute("href", encodedUri);
 	link.setAttribute("download", "u11_gradscool_results.csv");
 	link.click();
+}
+
+function wakeApi() {
+    $.ajax({
+	    type: "GET",
+	    url: "https://u11-grad.herokuapp.com/api/wake",
+	    contentType: 'application/json;charset=UTF-8',
+	    success: function(response) {
+		return 0;
+	    }
+	});
 }
 
 function executeClassifier() {
