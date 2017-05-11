@@ -1,0 +1,122 @@
+<!DOCTYPE <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="styles.css"</link>
+	<title>U11</title>
+<script type="text/javascript" src="lib/jquery-1.12.3.min.js">
+</script>
+<script type="text/javascript" src="script.js"></script>
+</head>
+<body style="background-color: #f7f7f7;">
+<table style="width: 100%;height: 100%;">
+	<tr bgcolor="#FF0000" style="height: 5%;"></tr>
+	<tr style="height:90%;">
+		<td style="width:15%;"></td>
+		<td style="padding: 0px">
+			<table id="content-table" cellspacing="0">
+				<tr>
+					<td id="nav-bar" valign="top">
+						<img src="U11 logo.png" style="width: 100%" />
+						<ul style="list-style-type: none; padding: 0px">
+							<li><p id="navGroup1" class="navLevel1">Introduction</p></li>
+							<li>
+							  	<p id="navGroup2" class="navLevel1">Academic Background</p>
+							  	<ul style="list-style-type: none">
+							  		<li><p class="navLevel2 nav2Highlighted">Test Scores</p></li>
+							  		<li><p class="navLevel2">Education</p></li>
+							  	</ul>
+							</li>
+							<li>
+							  	<p id="navGroup3" class="navLevel1">Preferences</p>
+							  	<ul style="list-style-type: none">
+							  		<li><p class="navLevel2">Field of Study</p></li>
+							  		<li><p class="navLevel2">College Ranking</p></li>
+							  		<li><p class="navLevel2">Cost of Attendence</p></li>
+							  	</ul>
+							</li>
+							<li>
+							  	<p id="navGroup4" class="navLevel1">Results</p>
+							</li>
+						</ul>
+					</td>
+					<td id="main-box">
+						<div style="height:20%">
+							<p id="splash-text">Welcome to U11</p>
+						</div>
+						<div id="dynamic-content-row">
+								<div id="dc0" class="dc">
+									<p class="text1">Click the next button to begin</p>
+								</div>
+								<div id="dc1" class="dc">
+									<form>
+										<label for="GRE-Q" class="text2">GRE Q</label>
+										<input type="text" id="GRE-Q" placeholder="130 - 170 or 200 - 800" /><br><br><br><br>
+										<label for="GRE-V" class="text2">GRE V</label>
+										<input type="text" id="GRE-V" placeholder="130 - 170 or 200 - 800" /><br><br><br><br>
+										<label for="GRE-W" class="text2">GRE W</label>
+										<input type="text" id="GRE-W" placeholder="0 - 6" /><br><br><br><br>
+										<label for="TOEFL" class="text2">TOEFL</label>
+										<input type="text" id="TOEFL" placeholder="0 - 120" />
+									</form>
+								</div>
+								<div id="dc2" class="dc">
+									<form>
+										<label for="UNI-RANK" class="text2">University Ranking</label>
+										<input type="text" id="UNI-RANK" placeholder="1 - 1000" /><br><br><br><br>
+										<label for="GPA" class="text2">GPA</label>
+										<input type="text" id="GPA" placeholder="0.0 - 4.0" />
+									</form>
+								</div>
+								<div id="dc3" class="dc">
+									<form>
+										<select id="MAJOR">
+										</select>
+									</form>
+								</div>
+								<div id="dc4" class="dc">
+									<input type="range" id="RANK-IMPORTANCE" />
+									<div style="width: 100%">
+									<p class="text2" style="text-align: center;">Not Important   &lt; ----- &gt;   Very Important</p>
+									</div>
+								</div>
+								<div id="dc5" class="dc">
+									<input type="range" id="COST-IMPORTANCE" />
+									<p class="text2" style="text-align: center;">Not Important   &lt; ----- &gt;   Very Important</p>
+								</div>
+								<div id="dc6" class="dc">
+									<table id="results-table" cellspacing="0">
+										<tr id="results-header-row">
+											<td class="results-cell">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+											<td class="results-cell">University</td>
+											<td class="results-cell">QS Ranking</td>
+											<td class="results-cell">Cost of Attendence</td>
+											<td class="results-cell">Chances of Acceptence</td>
+										</tr>
+										<tr id="results-item-row">
+											<td class="results-cell">1.</td>
+											<td class="results-cell">Very long named Institute of Technology at Some Place</td>
+											<td class="results-cell">888</td>
+											<td class="results-cell">$12345</td>
+											<td class="results-cell">88.888%</td>
+										</tr>
+									</table>
+								</div>
+						</div>
+						<div id="button-row" style="height: 10%">
+							<button type="button" id="backbutton">Back</button>
+							<button type="button" id="nextbutton" style="float: right;">Next</button>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<p class='footer'>Ravish Chawla, Anirban Chatterjee, Tanmay Rajpurohit, Yanchao Feng, Yannick Schröcker</p>
+		</td>
+		<td style="width:15%;"></td>
+	</tr>
+	<tr style="height: 5%;"></tr>
+	
+</table>
+</body>
+</html>
