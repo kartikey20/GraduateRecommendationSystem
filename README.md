@@ -63,3 +63,5 @@ Start a new service (while keeping the above service running):
 The application will be viewable now. It will be accesible via a browser window, on `http://localhost:8000`. 
 
 Upon opening the website, follow the on-screen instructions to go through the different steps, and view the results of the app. Images of what different steps of the application are can be viewed in the project sub-directory `images/`. 
+
+http://graduateranking.herokuapp.com/main.htm
